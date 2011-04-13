@@ -1,12 +1,13 @@
 package fillapix;
 
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 /**
- *
- * @author flipvanrijn
+ * Class to create an image of a Grid object.
+ * @author Flip van Rijn
  */
 public class Image
 {
@@ -15,6 +16,12 @@ public class Image
     private int black = 0x000;
     private int white = 0xFFFFFF;
 
+    /**
+     * Constructor which sets the height and width and initializes an 
+     * image object.
+     * @param height Height of the image
+     * @param width Width of the image
+     */
     public Image(int height, int width)
     {
         this.sizeY = height;
@@ -22,6 +29,10 @@ public class Image
         this.image = new BufferedImage(this.sizeX, this.sizeY, BufferedImage.TYPE_INT_RGB);
     }
 
+    /**
+     * Draws each square in the grid onto the image.
+     * @param matrix The grid of the puzzle
+     */
     public void draw(Grid.Square[][] matrix)
     {
         for (int y = 0; y < matrix.length; y++)
@@ -36,6 +47,11 @@ public class Image
         }
     }
 
+    /**
+     * Saves the drawn pixels to a file.
+     * @param fileName File name
+     * @return boolean Saved
+     */
     public boolean save(String fileName)
     {
         File file = new File(fileName);

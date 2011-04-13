@@ -1,14 +1,14 @@
 package fillapix;
 
 /**
- *
- * @author flipvanrijn
+ * A small Fill-a-Pix solver.
+ * @author Flip van Rijn
  */
 public class Main
 {
 
     /**
-     * @param args the command line arguments
+     * @param args The command line arguments
      */
     public static void main(String[] args)
     {

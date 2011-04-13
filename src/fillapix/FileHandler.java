@@ -5,8 +5,8 @@ import java.io.FileReader;
 import java.io.LineNumberReader;
 
 /**
- *
- * @author flipvanrijn
+ * Class to handle a Fill-a-Pix file and parse it.
+ * @author Flip van Rijn
  */
 public class FileHandler
 {
@@ -14,6 +14,10 @@ public class FileHandler
     private int[][] numbersMatrix;
     BufferedReader inFile;
 
+    /**
+     * Initializes a new file object and determines the size of the puzzle.
+     * @param fileName File name of the puzzle
+     */
     public FileHandler(String fileName)
     {
         this.fileName = fileName;
@@ -29,6 +33,11 @@ public class FileHandler
         setSize();
     }
 
+    /**
+     * Parses the lines in a file and returns the multi-dimensional numbers
+     * array which represents the puzzle. 
+     * @return int array
+     */
     public int[][] read()
     {
         try
@@ -53,6 +62,10 @@ public class FileHandler
         return numbersMatrix;
     }
 
+    /**
+     * Counts the number of lines and the line size to figure out how large
+     * the puzzle will be.
+     */
     private void setSize()
     {
         int countLines = countLines();
@@ -61,6 +74,10 @@ public class FileHandler
         numbersMatrix = new int[countLines][lineSize];
     }
 
+    /**
+     * Determines the size of a line.
+     * @return int Line size
+     */
     public int getLineSize()
     {
         int lineSize = 0;
@@ -78,6 +95,10 @@ public class FileHandler
         return lineSize;
     }
 
+    /**
+     * Counts the number of lines.
+     * @return int Number of lines
+     */
     public int countLines()
     {
         int countLines = 0;
@@ -96,6 +117,12 @@ public class FileHandler
         return countLines;
     }
 
+    /**
+     * Transforms a Grid object of the puzzle into a .gif format.
+     * @param fileName The name of the picture
+     * @param picture The Grid object of the puzzle
+     * @return boolean Save successful
+     */
     public boolean toImage(String fileName, Grid picture)
     {
         Image image = new Image(picture.getHeight(), picture.getWidth());
@@ -104,6 +131,11 @@ public class FileHandler
         return image.save(fileName);
     }
 
+    /**
+     * Returns a number representation of a character.
+     * @param character Character to represent
+     * @return int Transformed character
+     */
     private int getValue(char character)
     {
         if (character == ' ')

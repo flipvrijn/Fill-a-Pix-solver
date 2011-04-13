@@ -1,20 +1,27 @@
 package fillapix;
 
 /**
- *
- * @author flipvanrijn
+ * Class of the solver for a Fill-a-Pix puzzle.
+ * @author Flip van Rijn
  */
 public class Solver
 {
     private Grid grid;
     private int[][] numbersMatrix;
 
+    /**
+     * Constructor which crates a new Grid of a numeric matrix.
+     * @param numbersMatrix The matrix with numbers
+     */
     public Solver(int[][] numbersMatrix)
     {
         this.numbersMatrix = numbersMatrix;
         grid = new Grid(numbersMatrix);
     }
 
+    /**
+     * Solves a Fill-a-Pix puzzle with basic heuristics.
+     */
     public void solve()
     {
         this.fillNine();
@@ -25,16 +32,28 @@ public class Solver
             this.finishNumber();
     }
 
+    /**
+     * Prints the puzzle grid to STDOUT.
+     */
     public void show()
     {
         System.out.print(grid);
     }
 
+    /**
+     * Returns the Grid object
+     * @return Grid
+     */
     public Grid getPicture()
     {
         return grid;
     }
 
+    /**
+     * Completes a square based on the number. If there are enough Black
+     * squares, the other adjacent squares must be Cross. If there are enough
+     * Cross squares, the other adjacent squares must be Black.
+     */
     private void finishNumber()
     {
         for (int y = 0; y < grid.getHeight(); y++)
@@ -53,6 +72,9 @@ public class Solver
         }
     }
 
+    /**
+     * Fills all squares adjacent to a square with a nine in it.
+     */
     private void fillNine()
     {
         for (int y = 1; y < grid.getHeight(); y++)
@@ -65,6 +87,9 @@ public class Solver
         }
     }
 
+    /**
+     * Crosses all squares adjacent to a square with a zero in it.
+     */
     private void fillZero()
     {
         for (int y = 0; y < grid.getHeight(); y++)
@@ -77,6 +102,9 @@ public class Solver
         }
     }
 
+    /**
+     * Fills all squares adjacent to the corner square with a four in it.
+     */
     private void fillCornerFour()
     {
         if (numbersMatrix[0][0] == 4)
@@ -92,6 +120,9 @@ public class Solver
             grid.fillRemaining(grid.getHeight() - 1, grid.getWidth() - 1, Grid.Square.Black);
     }
 
+    /**
+     * Filles all squares adjacent to the border square with a six in it.
+     */
     private void fillBorderSix()
     {
         for (int y = 0; y < grid.getHeight(); y++)
